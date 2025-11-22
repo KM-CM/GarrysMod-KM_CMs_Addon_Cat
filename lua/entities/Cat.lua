@@ -8,6 +8,15 @@ sound.Add {
 	sound = "Cat/PurrLoop.wav"
 }
 
+sound.Add {
+	name = "CatStartled",
+	channel = CHAN_VOICE,
+	level = 110,
+	pitch = { 80, 120 },
+	// TODO: We need WAY more startled cat sounds!!!
+	sound = "Cat/Startled/1.wav"
+}
+
 list.Set( "NPC", "Cat", {
 	Name = "#Cat",
 	Class = "Cat",
@@ -32,30 +41,40 @@ ENT.flThirstLimit = 6
 ENT.bCantUse = true
 ENT.bCanStartle = true
 
+ENT.bCombatForgetLastHostile = true
+
 local math = math
 local math_Rand = math.Rand
 local math_random = math.random
 
+local CEntity = FindMetaTable "Entity"
+local CEntity_GetTable = CEntity.GetTable
+local CEntity_EmitSound = CEntity.EmitSound
+
+local Color = Color
+
 function ENT:Initialize()
 	BaseClass.Initialize( self )
 	// Random parameters for E A C H   K A T Z E   M O D E L
-	if !self.flTopSpeed then self.flTopSpeed = math_Rand( 320, 520 ) end
-	if !self.flProwlSpeed then self.flProwlSpeed = math_Rand( 120, 160 ) end
-	if !self.flWalkSpeed then self.flWalkSpeed = math_Rand( 40, 80 ) end
+	local MyTable = CEntity_GetTable( self )
+	if !MyTable.flTopSpeed then MyTable.flTopSpeed = math_Rand( 320, 520 ) end
+	if !MyTable.flProwlSpeed then MyTable.flProwlSpeed = math_Rand( 120, 160 ) end
+	if !MyTable.flWalkSpeed then MyTable.flWalkSpeed = math_Rand( 40, 80 ) end
 	self:SetModel "models/jeezy/animals/siamese_cat/siamese_cat.mdl"
 	if self:GetMaxHealth() == 0 then self:SetMaxHealth( math_Rand( 60, 80 ) ) end
-	if self.flBoldness == -1 then self.flBoldness = math_Rand( .5, 2 ) end
+	if MyTable.flBoldness == -1 then MyTable.flBoldness = math_Rand( .33, 3 ) end
 	if self:Health() == 0 then self:SetHealth( self:GetMaxHealth() ) end
-	if self.flHearDistanceMultiplier == 1 then self.flHearDistanceMultiplier = math_Rand( 4, 5 ) end
-	if self.flHunger == -1 then self.flHunger = self.flHungerLimit end
-	if self.flThirst == -1 then self.flThirst = self.flThirstLimit end
-	local clColor = self.clColor || Color( math_random( 192, 255 ), math_random( 192, 255 ), math_random( 192, 255 ) )
-	self.clColor = clColor
+	if MyTable.flHearDistanceMultiplier == 1 then MyTable.flHearDistanceMultiplier = math_Rand( 4, 5 ) end
+	if MyTable.flHunger == -1 then MyTable.flHunger = MyTable.flHungerLimit end
+	if MyTable.flThirst == -1 then MyTable.flThirst = MyTable.flThirstLimit end
+	if !MyTable.sGender then MyTable.sGender = math_random( 2 ) == 1 && "Male" || "Female" end
+	local clColor = MyTable.clColor || Color( math_random( 192, 255 ), math_random( 192, 255 ), math_random( 192, 255 ) )
+	MyTable.clColor = clColor
 	self:SetColor( clColor )
 	self:SetSolid( SOLID_OBB )
 	self:PhysicsInitShadow( false, false )
-	local iSkin = self.iSkin || math_random( 0, 9 )
-	self.iSkin = iSkin
+	local iSkin = MyTable.iSkin || math_random( 0, 9 )
+	MyTable.iSkin = iSkin
 	self:SetSkin( iSkin )
 end
 
@@ -73,6 +92,8 @@ function ENT:MoveAlongPath( Path, flSpeed, _/*flHeight*/, tFilter )
 		self:PromoteSequence( "walk", GetVelocity( self ):Length() / 60 )
 	end
 end
+
+function ENT:DLG_Startled() CEntity_EmitSound( self, "CatStartled" ) end
 
 function ENT:HandlePurr( flVolume, flVolumeRate, flPitch, flPitchRate )
 	local pPurrLoop = MyTable.pPurrLoop
