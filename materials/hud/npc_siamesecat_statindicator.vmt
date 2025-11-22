@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "hud/npc_siamesecat_statindicator"
+	"$translucent" 1
+}

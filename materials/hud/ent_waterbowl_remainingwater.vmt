@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "hud/ent_waterbowl_remainingwater"
+	"$translucent" 1
+}

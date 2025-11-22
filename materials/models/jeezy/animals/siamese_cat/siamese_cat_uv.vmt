@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/jeezy/animals/siamese_cat/siamese_cat_uv"
+	"$surfaceprop" "flesh"
+	"$model" 1
+}
+
+
+

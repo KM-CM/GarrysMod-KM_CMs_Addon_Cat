@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "hud/ent_catfood_remainingfood"
+	"$translucent" 1
+}

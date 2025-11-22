@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/props/jeezy/pet_waterbowl/water_material"
+	"$surfaceprop" "metal"
+	"$model" 1
+}
+
+
+
