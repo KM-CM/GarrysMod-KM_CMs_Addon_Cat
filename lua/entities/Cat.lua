@@ -43,6 +43,8 @@ ENT.bCanStartle = true
 
 ENT.bCombatForgetLastHostile = true
 
+ENT.bCannotCarryWeapons = true
+
 local math = math
 local math_Rand = math.Rand
 local math_random = math.random
