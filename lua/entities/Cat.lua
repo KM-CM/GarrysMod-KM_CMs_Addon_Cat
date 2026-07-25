@@ -60,7 +60,7 @@ function ENT:Initialize()
 	// Random parameters for E A C H   K A T Z E   M O D E L
 	local MyTable = CEntity_GetTable( self )
 	if !MyTable.flTopSpeed then MyTable.flTopSpeed = math_Rand( 320, 520 ) end
-	if !MyTable.flRunSpeed then MyTable.flRunSpeed = math_Rand( 120, 160 ) end
+	if !MyTable.flJogSpeed then MyTable.flJogSpeed = math_Rand( 120, 160 ) end
 	if !MyTable.flWalkSpeed then MyTable.flWalkSpeed = math_Rand( 40, 80 ) end
 	self:SetModel "models/jeezy/animals/siamese_cat/siamese_cat.mdl"
 	if self:GetMaxHealth() == 0 then self:SetMaxHealth( math_Rand( 60, 80 ) ) end
@@ -88,7 +88,7 @@ function ENT:MoveAlongPath( Path, flSpeed, _/*flHeight*/, tFilter )
 	self:HandleJumpingAlongPath( Path, flSpeed, tFilter )
 	local f = GetVelocity( self ):Length()
 	if f <= 12 then self:PromoteSequence "idle"
-	elseif f > self.flRunSpeed * .9 then
+	elseif f > self.flJogSpeed * .9 then
 		self:PromoteSequence( "run", GetVelocity( self ):Length() / 200 )
 	else
 		self:PromoteSequence( "walk", GetVelocity( self ):Length() / 60 )
