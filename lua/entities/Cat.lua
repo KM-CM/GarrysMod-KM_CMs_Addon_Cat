@@ -13,7 +13,7 @@ sound.Add {
 	channel = CHAN_VOICE,
 	level = 110,
 	pitch = { 80, 120 },
-	// TODO: We need WAY more startled cat sounds!!!
+	// TODO: We need WAY more startled cat sounds
 	sound = "Cat/Startled/1.wav"
 }
 
@@ -25,7 +25,7 @@ list.Set( "NPC", "Cat", {
 
 if !SERVER then return end
 
-ENT.Categorize = { Cat = true }
+ENT.CATEGORIZE = { Cat = true }
 
 ENT.vHullMins = Vector( -24, -6, 0 )
 ENT.vHullMaxs = Vector( 24, 6, 24 )
@@ -85,7 +85,7 @@ function ENT:MoveAlongPath( Path, flSpeed, _/*flHeight*/, tFilter )
 	local f = flSpeed * ACCELERATION_NORMAL
 	self.loco:SetAcceleration( f )
 	self.loco:SetDeceleration( f )
-	self:HandleJumpingAlongPath( Path, flSpeed, tFilter )
+	self:GrountMovement( Path, flSpeed, tFilter )
 	local f = GetVelocity( self ):Length()
 	if f <= 12 then self:PromoteSequence "idle"
 	elseif f > self.flJogSpeed * .9 then
