@@ -57,14 +57,14 @@ local Color = Color
 
 function ENT:Initialize()
 	BaseClass.Initialize( self )
-	// Random parameters for E A C H   K A T Z E   M O D E L
+	// Random parameters for e a c h   k a t z e   m o d e l
 	local MyTable = CEntity_GetTable( self )
 	if !MyTable.flTopSpeed then MyTable.flTopSpeed = math_Rand( 320, 520 ) end
 	if !MyTable.flJogSpeed then MyTable.flJogSpeed = math_Rand( 120, 160 ) end
 	if !MyTable.flWalkSpeed then MyTable.flWalkSpeed = math_Rand( 40, 80 ) end
 	self:SetModel "models/jeezy/animals/siamese_cat/siamese_cat.mdl"
 	if self:GetMaxHealth() == 0 then self:SetMaxHealth( math_Rand( 60, 80 ) ) end
-	if MyTable.flBoldness == -1 then MyTable.flBoldness = math_Rand( .33, 3 ) end
+	if MyTable.flBoldness == -1 then MyTable.flBoldness = math_Rand( 1 / 3, 3 ) end
 	if self:Health() == 0 then self:SetHealth( self:GetMaxHealth() ) end
 	if MyTable.flHearDistanceMultiplier == 1 then MyTable.flHearDistanceMultiplier = math_Rand( 4, 5 ) end
 	if MyTable.flHunger == -1 then MyTable.flHunger = MyTable.flHungerLimit end
