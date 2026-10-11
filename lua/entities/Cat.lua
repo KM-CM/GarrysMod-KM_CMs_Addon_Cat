@@ -66,7 +66,7 @@ function ENT:Initialize()
 	if self:GetMaxHealth() == 0 then self:SetMaxHealth( math_Rand( 60, 80 ) ) end
 	if MyTable.flBoldness == -1 then MyTable.flBoldness = math_Rand( 1 / 3, 3 ) end
 	if self:Health() == 0 then self:SetHealth( self:GetMaxHealth() ) end
-	if MyTable.flHearDistanceMultiplier == 1 then MyTable.flHearDistanceMultiplier = math_Rand( 4, 5 ) end
+	if MyTable.flHearingStrength == 1 then MyTable.flHearingStrength = math_Rand( 4, 5 ) end
 	if MyTable.flHunger == -1 then MyTable.flHunger = MyTable.flHungerLimit end
 	if MyTable.flThirst == -1 then MyTable.flThirst = MyTable.flThirstLimit end
 	if !MyTable.sGender then MyTable.sGender = math_random( 2 ) == 1 && "Male" || "Female" end
@@ -85,7 +85,7 @@ function ENT:MoveAlongPath( Path, flSpeed, _/*flHeight*/, tFilter )
 	local f = flSpeed * ACCELERATION_NORMAL
 	self.loco:SetAcceleration( f )
 	self.loco:SetDeceleration( f )
-	self:GrountMovement( Path, flSpeed, tFilter )
+	self:GroundMovement( Path, flSpeed, tFilter )
 	local f = GetVelocity( self ):Length()
 	if f <= 12 then self:PromoteSequence "idle"
 	elseif f > self.flJogSpeed * .9 then
